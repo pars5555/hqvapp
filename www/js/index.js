@@ -38,7 +38,7 @@ var app = {
                 app.onDeviceReady();
             }
         });
-        
+
     },
     // deviceready Event Handler
     //
@@ -58,13 +58,12 @@ var app = {
         });
     },
     login: function (login, password) {
-        alert(login);
-        $.post("example.php", {login: login, password: password})
-                .done(function () {
-                    alert('done');
+        $.post("http://95.140.192.34", {login: login, password: password})
+                .done(function (data) {
+                    window.location = "home.html";
                 })
                 .fail(function () {
-                    alert('fail');
+                    alert('no Connection');
                 });
     }
 };

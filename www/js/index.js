@@ -64,6 +64,7 @@ var app = {
                     }
                 })
                 .fail(function () {
+                    
                     $('#error_message').html('No Connection!');
                 });
     }

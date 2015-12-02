@@ -62,6 +62,7 @@
     <gap:splash src="www/res/screen/ios/screen-ipad-landscape.png" gap:platform="ios" width="1024" height="768"/>
     <gap:splash src="www/res/screen/windows-phone/screen-portrait.jpg" gap:platform="winphone"/>
     <access origin="*"/>
+    <access origin="95.140.192.34" />
     <plugin name="cordova-plugin-whitelist" version="1"/>
     <plugin name="cordova-plugin-whitelist" source="npm" />
     <allow-intent href="http://*/*"/>

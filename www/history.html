@@ -26,23 +26,17 @@
         <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
         <link rel="stylesheet" type="text/css" href="css/index.css" />
-        <title>Home</title>
-        <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
-        <script type="text/javascript" src="js/jquery.mobile-1.4.5.min"></script>
-        <script type="text/javascript" src="js/home.js"></script>
+        <title>History</title>
     </head>
     <body>
-        <form class="add-number-form" id="addNumberForm">
-            <div id="success_message" class="success"></div>    
-            <div id="error_message" class="error"></div> 
-            <input id="number" class="text number" type="number" min="1" step="1" value="" placeholder="Number" autocomplete="off"/>
-            <input class="button save" type="submit" value="SAVE"/>
-        </form>   
-        <a class="button history" href="./history.html">
-            History
+        <a class="button" href="./home.html">
+            Back
         </a> 
-        <a class="button logout" href="./index.html">
-            Logout
-        </a> 
+        <div id="number-history" class="number-history">
+        </div>
+        <script type="text/javascript">
+            var text = window.localStorage["numbers"].slice(0, -1);
+            document.getElementById("number-history").innerHTML = text;
+        </script>
     </body>
 </html>

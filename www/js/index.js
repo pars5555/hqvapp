@@ -26,28 +26,21 @@ var app = {
     // Bind any events that are required on startup. Common events are:
     // 'load', 'deviceready', 'offline', and 'online'.
     bindEvents: function () {
-        $(document).ready(function () {
-            // are we running in native app or in a browser?
-            window.isphone = false;
-            if (document.URL.indexOf("file") === -1) {
-                window.isphone = true;
-            }
-            if (window.isphone) {
-                document.addEventListener("deviceready", app.onDeviceReady, false);
-            } else {
-                app.onDeviceReady();
-            }
-        });
-
+        document.addEventListener("deviceready", app.onDeviceReady, false);
     },
     // deviceready Event Handler
     //
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function () {
+        app.receivedEvent('deviceready');
+    },
+    receivedEvent: function (id) {
+       
         this.initPage();
     },
     initPage: function () {
+        window.localStorage["hash"] = "";
         $('#loginForm').on('submit', function (e) {
             var login = $('#login').val();
             var password = $('#password').val();
@@ -58,12 +51,20 @@ var app = {
         });
     },
     login: function (login, password) {
-        $.post("http://95.140.192.34", {login: login, password: password})
+        $.post("http://95.140.192.34/do.php", {action: '/observer/login', username: login, password: password})
                 .done(function (data) {
-                    window.location = "home.html";
+                    var ret = $.parseJSON(data);
+                    if (ret.status === 'ok') {
+                        $('#error_message').html('3');
+                        window.localStorage["hash"] = ret.hash;
+                        window.localStorage["numbers"] = "";
+                        window.location = "home.html";
+                    } else {
+                        $('#error_message').html(ret.message);
+                    }
                 })
                 .fail(function () {
-                    alert('no Connection');
+                    $('#error_message').html('No Connection!');
                 });
     }
 };
